@@ -5,7 +5,6 @@ import com.team2502.lib.LimelightHelpers.PoseEstimate
 import com.team2502.lib.LimelightHelpers.RawFiducial
 import com.team2502.robot2026.Constants.Localization.ACCEPTABLE_OUTLIER_COUNT
 import com.team2502.robot2026.Constants.Localization.LIMELIGHT_FRONT_NAME
-import com.team2502.robot2026.Constants.Localization.LIMELIGHT_SIDE_NAME
 import com.team2502.robot2026.Constants.Localization.MAX_LIMELIGHT_POSE_DIFFERENCE_METERS
 import com.team2502.robot2026.Constants.Weights.CHASSIS_XY_STDDEV_COEFFICIENT
 import com.team2502.robot2026.Constants.Weights.DEFAULT_XY_STDDEV
@@ -63,18 +62,11 @@ object VisionSubsystem {
     }
 
     fun update() {
-        val sidePos = getVisionPose2d(LIMELIGHT_SIDE_NAME)
         val frontPos = getVisionPose2d(LIMELIGHT_FRONT_NAME)
-        val sideStdDev = getStdDev(RobotContainer.INSTANCE.getPose(), sidePos)
         val frontStdDev = getStdDev(RobotContainer.INSTANCE.getPose(), frontPos)
 
-        val sideFirst = sidePos != null && frontPos != null && sidePos.timestampSeconds < frontPos.timestampSeconds
-        if (sideFirst) {
-            addToFilter(sidePos, sideStdDev)
+        if (frontPos != null) {
             addToFilter(frontPos, frontStdDev)
-        } else {
-            addToFilter(frontPos, frontStdDev)
-            addToFilter(sidePos, sideStdDev)
         }
     }
 
@@ -86,8 +78,8 @@ object VisionSubsystem {
                     val translationDelta = pose.pose.minus(RobotContainer.INSTANCE.getPose())
                     val yawDelta = pose.pose.rotation.minus(RobotContainer.INSTANCE.getYaw())
 
-                    if (translationDelta.translation.norm > MAX_LIMELIGHT_POSE_DIFFERENCE_METERS 
-                        || yawDelta.degrees > 90.0 
+                    if (translationDelta.translation.norm > MAX_LIMELIGHT_POSE_DIFFERENCE_METERS
+                        || yawDelta.degrees > 90.0
                         || yawDelta.degrees < -90.0) {
                         outlierCount++
 
@@ -108,7 +100,7 @@ object VisionSubsystem {
 
                     val filterPose = Pose2d(
                         pose.pose.translation,
-                         RobotContainer.INSTANCE.getYaw()
+                        RobotContainer.INSTANCE.getYaw()
                     )
                     RobotContainer.INSTANCE.drivetrainSubsystem.addVisionMeasurement(
                         filterPose,

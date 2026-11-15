@@ -16,45 +16,24 @@ class Constants {
     }
 
     object Intake {
-        const val INTAKE_IN_DUTY_CYCLE: Double = 1.0
-        const val INTAKE_OUT_DUTY_CYCLE: Double = -1.0
-        const val TUNNEL_IN_DUTY_CYCLE: Double = 1.0
-        const val TUNNEL_OUT_DUTY_CYCLE: Double = -1.0
-        const val RAMP_IN_DUTY_CYCLE: Double = 0.8
-        const val RAMP_OUT_DUTY_CYCLE: Double = -0.8
-
-        const val UNJAM_CYCLE_TIME_SECONDS: Double = 0.25
+        const val INTAKE_IN_DUTY_CYCLE_RIGHT: Double = 1.0
+        const val INTAKE_IN_DUTY_CYCLE_LEFT: Double = 1.0
+        const val INTAKE_OUT_DUTY_CYCLE_RIGHT: Double = -1.0
+        const val INTAKE_OUT_DUTY_CYCLE_LEFT: Double = -1.0
     }
 
     object Shooter {
-        const val SHOOTER_MIN_VELOCITY: Double = 30.0
-        const val SHOOTER_MAX_VELOCITY: Double = 100.0
-        const val HOOD_MIN_POSITION: Double = 0.0
-        const val HOOD_MAX_POSITION: Double = 2.2992
+        const val INDEXER_FEED_DUTY_CYCLE_RIGHT: Double = 1.0
+        const val INDEXER_FEED_DUTY_CYCLE_LEFT: Double = 1.0
+        const val INDEXER_PASSIVE_DUTY_CYCLE_RIGHT: Double = 0.1
+        const val INDEXER_PASSIVE_DUTY_CYCLE_LEFT: Double = 0.1
+        const val MIN_VELOCITY: Double = 40.0
+        const val MAX_VELOCITY: Double = 320.0
 
-        const val SHOOTER_RAMP_IN_DUTY_CYCLE: Double = 1.0
-        const val SHOOTER_RAMP_OUT_DUTY_CYCLE: Double = -1.0
-    }
-
-    object Turret {
-        const val MOTOR_TO_TURRET_RATIO: Double = 34.5
-        const val ABS_TO_RELATIVE_RATIO: Double = 6.0
-
-        const val TURRET_ABSOLUTE_ENCODER_ZERO_ROTATIONS: Double = -0.199463
-
-        // Max amount of revolution per frame of turret motor
-        const val TURRET_CLAMP: Double = 2.5
-
-        const val ORIGIN_TO_TURRET_CENTER_X = 0.1016
-        const val ORIGIN_TO_TURRET_CENTER_Y = 0.05715
-
-        const val DISTANCE_SCALAR_SMUDGE_METERS = 1.25
     }
 
     object Localization {
-        const val LIMELIGHT_SIDE_NAME: String = "limelight-side"
         const val LIMELIGHT_FRONT_NAME: String = "limelight-front"
-
         const val MAX_LIMELIGHT_POSE_DIFFERENCE_METERS = 1.0
         const val ACCEPTABLE_OUTLIER_COUNT = 4
         const val POSE_ANTICIPATION_TIMESTEP_SECS = 0.1

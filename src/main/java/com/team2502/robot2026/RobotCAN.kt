@@ -15,62 +15,46 @@ object RobotCAN {
     val TURN_MOTOR_CONFIG =
         MotorConfig(PIDConfig(kP = 40.0), true, NeutralModeValue.Coast)
 
-    val INTAKE = CANConfig(
-        18,
-        "Intake",
+    val INTAKE_RIGHT = CANConfig(
+        1,
+        "Intake Right",
         RobotCANBus.RIO,
-        MotorConfig(PIDConfig(kP = 0.1), ccwp = false, neutralMode = NeutralModeValue.Coast))
+        MotorConfig(PIDConfig(kP = 0.1), ccwp = false, neutralMode = NeutralModeValue.Coast),
+        )
 
-    val TURRET = CANConfig(
-        16,
-        "Turret",
+    val INTAKE_LEFT = CANConfig(
+        2,
+        "Intake Left",
         RobotCANBus.RIO,
-        MotorConfig(PIDConfig(kP = 8.0, kI = 2.5), ccwp = true, neutralMode = NeutralModeValue.Brake))
+        MotorConfig(PIDConfig(kP = 0.1), ccwp = false, neutralMode = NeutralModeValue.Coast),
+    )
 
-    val TUNNEL = CANConfig(
-        21,
-        "Tunnel",
+    val INDEXER_RIGHT = CANConfig(
+        3,
+        "Indexer Right",
         RobotCANBus.RIO,
-        MotorConfig(PIDConfig(), ccwp = true, neutralMode = NeutralModeValue.Coast))
+        MotorConfig(PIDConfig(kP = 0.1), ccwp = false, neutralMode = NeutralModeValue.Brake),
+    )
 
-    val RAMP = CANConfig(
-        22,
-        "Ramp",
+    val INDEXER_LEFT = CANConfig(
+        4,
+        "Indexer Left",
         RobotCANBus.RIO,
-        MotorConfig(PIDConfig(), ccwp = false, neutralMode = NeutralModeValue.Brake))
-
-    private val SHOOTER_PID_CONFIG = PIDConfig(kP = 0.03, kI = 0.12)
+        MotorConfig(PIDConfig(kP = 0.1), ccwp = false, neutralMode = NeutralModeValue.Brake),
+    )
 
     val SHOOTER_RIGHT = CANConfig(
-        13,
+        5,
         "Shooter Right",
-        RobotCANBus.SHOOTER,
-        MotorConfig(SHOOTER_PID_CONFIG, ccwp = false, neutralMode = NeutralModeValue.Coast))
+        RobotCANBus.RIO,
+        MotorConfig(PIDConfig(kP = 0.1), ccwp = false, neutralMode = NeutralModeValue.Brake),
+    )
 
     val SHOOTER_LEFT = CANConfig(
-        14,
+        6,
         "Shooter Left",
-        RobotCANBus.SHOOTER,
-        MotorConfig(SHOOTER_PID_CONFIG, ccwp = true, neutralMode = NeutralModeValue.Coast))
-
-    val HOOD = CANConfig(
-        15,
-        "Hood",
-        RobotCANBus.SHOOTER,
-        MotorConfig(PIDConfig(kP = 0.55), ccwp = false, neutralMode = NeutralModeValue.Brake)
-    )
-
-    val TURRET_ENCODER = CANConfig(
-        2,
-        "Turret Encoder",
-        RobotCANBus.SHOOTER,
-        EncoderConfig(SensorDirectionValue.CounterClockwise_Positive, 0.5)
-    )
-
-    val GYRO = CANConfig(
-        23,
-        "Gyro",
         RobotCANBus.RIO,
-        GyroConfig()
+        MotorConfig(PIDConfig(kP = 0.1), ccwp = false, neutralMode = NeutralModeValue.Brake),
     )
+
 }

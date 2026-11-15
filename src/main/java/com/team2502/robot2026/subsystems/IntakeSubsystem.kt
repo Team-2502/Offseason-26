@@ -1,50 +1,43 @@
 package com.team2502.robot2026.subsystems
 
 import com.ctre.phoenix6.controls.DutyCycleOut
-import com.team2502.lib.config.create
-import com.team2502.robot2026.Constants
-import com.team2502.robot2026.Constants.Intake.INTAKE_IN_DUTY_CYCLE
-import com.team2502.robot2026.Constants.Intake.INTAKE_OUT_DUTY_CYCLE
-import com.team2502.robot2026.Constants.Intake.RAMP_IN_DUTY_CYCLE
-import com.team2502.robot2026.Constants.Intake.RAMP_OUT_DUTY_CYCLE
-import com.team2502.robot2026.Constants.Intake.TUNNEL_IN_DUTY_CYCLE
-import com.team2502.robot2026.Constants.Intake.TUNNEL_OUT_DUTY_CYCLE
-import com.team2502.robot2026.RobotCAN.INTAKE
-import com.team2502.robot2026.RobotCAN.RAMP
-import com.team2502.robot2026.RobotCAN.TUNNEL
 import edu.wpi.first.wpilibj2.command.SubsystemBase
+import com.team2502.lib.config.create
+import com.team2502.robot2026.RobotCAN.INTAKE_LEFT
+import com.team2502.robot2026.RobotCAN.INTAKE_RIGHT
+import com.team2502.robot2026.Constants.Intake.INTAKE_IN_DUTY_CYCLE_RIGHT
+import com.team2502.robot2026.Constants.Intake.INTAKE_OUT_DUTY_CYCLE_RIGHT
+import com.team2502.robot2026.Constants.Intake.INTAKE_IN_DUTY_CYCLE_LEFT
+import com.team2502.robot2026.Constants.Intake.INTAKE_OUT_DUTY_CYCLE_LEFT
 
 class IntakeSubsystem : SubsystemBase() {
-    private val intakeMotor = INTAKE.create()
-    private val tunnelMotor = TUNNEL.create()
-    private val rampMotor = RAMP.create()
+    private val intakeMotorLeft = INTAKE_LEFT.create()
+    private val intakeMotorRight = INTAKE_RIGHT.create()
     private val intakeDutyCycleRequest = DutyCycleOut(0.0)
 
-    private fun setDutyCycle(dutyCycleIntake: Double, dutyCycleTunnel: Double, dutyCycleRamp: Double) {
-        intakeMotor.setControl(intakeDutyCycleRequest.withOutput(dutyCycleIntake))
-        tunnelMotor.setControl(intakeDutyCycleRequest.withOutput(dutyCycleTunnel))
-        rampMotor.setControl(intakeDutyCycleRequest.withOutput(dutyCycleRamp))
+
+    private fun setDutyCycle(dutyCycleIntakeLeft: Double, dutyCycleIntakeRight: Double) {
+        intakeMotorLeft.setControl(intakeDutyCycleRequest.withOutput(dutyCycleIntakeLeft))
+        intakeMotorRight.setControl(intakeDutyCycleRequest.withOutput(dutyCycleIntakeRight))
     }
 
-    fun intake() {
+    fun intake(){
         setDutyCycle(
-            INTAKE_IN_DUTY_CYCLE,
-            TUNNEL_IN_DUTY_CYCLE,
-            RAMP_IN_DUTY_CYCLE
+            INTAKE_IN_DUTY_CYCLE_RIGHT,
+            INTAKE_IN_DUTY_CYCLE_LEFT
         )
     }
 
-    fun outtake() {
+    fun outtake(){
         setDutyCycle(
-            INTAKE_OUT_DUTY_CYCLE,
-            TUNNEL_OUT_DUTY_CYCLE,
-            RAMP_OUT_DUTY_CYCLE
+            INTAKE_OUT_DUTY_CYCLE_RIGHT,
+            INTAKE_OUT_DUTY_CYCLE_LEFT
         )
     }
 
-    fun stop() {
-        intakeMotor.stopMotor()
-        tunnelMotor.stopMotor()
-        rampMotor.stopMotor()
+    fun stop(){
+            intakeMotorLeft.stopMotor()
+            intakeMotorRight.stopMotor()
     }
+
 }
