@@ -9,6 +9,7 @@ import com.team2502.lib.TMJoystick
 import com.team2502.robot2026.Constants.OI
 import com.team2502.robot2026.commands.runIntakeCommand
 import com.team2502.robot2026.commands.runOuttakeCommand
+import com.team2502.robot2026.commands.setFlywheelSpeedCommand
 import com.team2502.robot2026.subsystems.Drive.CommandSwerveDrivetrain
 import com.team2502.robot2026.subsystems.VisionSubsystem
 import com.team2502.robot2026.subsystems.IntakeSubsystem
@@ -46,7 +47,7 @@ class RobotContainer {
 
     fun configureBindings() {
         // Drivetrain bindings
-        drivetrainSubsystem.defaultCommand = drivetrainSubsystem.applyRequest {
+        drivetrainSubsystem.defaultCommand = drivetrainSubsystem.applyRequest{
             val alliance = DriverStation.getAlliance().getOrDefault(DriverStation.Alliance.Blue)
             var velX: Double
             var velY: Double
@@ -67,9 +68,7 @@ class RobotContainer {
         operator.leftThumbButton().whileTrue(runIntakeCommand())
         operator.middleThumbButton().whileTrue(runOuttakeCommand())
 
-//        driverLeft.middleThumbButton().whileTrue(setTurretCommand(Rotation2d(0.0)))
-//        driverLeft.rightThumbButton().whileTrue(setTurretFieldAngleCommand(Rotation2d(0.0)))
-        // driverRight.rightThumbButton().whileTrue(VisionUpdateCommand())
+
     }
 
     fun update() {
@@ -80,6 +79,8 @@ class RobotContainer {
         else{
             ShooterSubsystem.isShooting = false
         }
+
+        setFlywheelSpeedCommand()
     }
 
     // global subsystem access via companion object

@@ -34,6 +34,11 @@ class ShooterSubsystem : SubsystemBase() {
         indexerRightMotor.setControl(shootDutyCycleRequest.withOutput(dutyCycleIndexerRight))
     }
 
+    public fun setDutyCycleShooter(dutyCycleShooterLeft: Double, dutyCycleShooterRight: Double,){
+        shooterLeftMotor.setControl(shootDutyCycleRequest.withOutput(dutyCycleShooterLeft))
+        shooterRightMotor.setControl(shootDutyCycleRequest.withOutput(dutyCycleShooterRight))
+    }
+
     fun feed(){
         setDutyCycleFeed(
             INDEXER_FEED_DUTY_CYCLE_LEFT,
@@ -41,7 +46,6 @@ class ShooterSubsystem : SubsystemBase() {
 
         )
     }
-
 
     fun passive(){
         setDutyCyclePassive(
