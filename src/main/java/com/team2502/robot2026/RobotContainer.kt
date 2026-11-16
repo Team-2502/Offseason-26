@@ -7,6 +7,7 @@ import com.ctre.phoenix6.swerve.SwerveModule
 import com.ctre.phoenix6.swerve.SwerveRequest
 import com.team2502.lib.TMJoystick
 import com.team2502.robot2026.Constants.OI
+import com.team2502.robot2026.commands.aimCommand
 import com.team2502.robot2026.commands.runIntakeCommand
 import com.team2502.robot2026.commands.runOuttakeCommand
 import com.team2502.robot2026.commands.setFlywheelSpeedCommand
@@ -67,8 +68,7 @@ class RobotContainer {
         // Bindings
         operator.leftThumbButton().whileTrue(runIntakeCommand())
         operator.middleThumbButton().whileTrue(runOuttakeCommand())
-
-
+        operator.rightThumbButton().whileTrue(aimCommand()) //wanna change this so trigger aims, waits 0.5 seconds(for flywheels to adjust speed, then starts shooting
     }
 
     fun update() {
