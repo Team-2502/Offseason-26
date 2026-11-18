@@ -11,6 +11,7 @@ import com.team2502.robot2026.commands.aimCommand
 import com.team2502.robot2026.commands.runIntakeCommand
 import com.team2502.robot2026.commands.runOuttakeCommand
 import com.team2502.robot2026.commands.setFlywheelSpeedCommand
+import com.team2502.robot2026.commands.ShootCommand
 import com.team2502.robot2026.subsystems.Drive.CommandSwerveDrivetrain
 import com.team2502.robot2026.subsystems.VisionSubsystem
 import com.team2502.robot2026.subsystems.IntakeSubsystem
@@ -33,7 +34,7 @@ class RobotContainer {
     // Subsystems
     val drivetrainSubsystem: CommandSwerveDrivetrain = TunerConstants.createDrivetrain()
     val intakeSubsystem: IntakeSubsystem = IntakeSubsystem()
-    val ShooterSubsystem: ShooterSubsystem = ShooterSubsystem()
+    val shooterSubsystem: ShooterSubsystem = ShooterSubsystem()
 
 
     // setup for global subsystem access
@@ -74,13 +75,14 @@ class RobotContainer {
     fun update() {
 
         if (operator.frontTrigger().equals(true)){
-            ShooterSubsystem.isShooting = true
+            shooterSubsystem.isShooting = true
         }
         else{
-            ShooterSubsystem.isShooting = false
+            shooterSubsystem.isShooting = false
         }
 
         setFlywheelSpeedCommand()
+        ShootCommand()
     }
 
     // global subsystem access via companion object

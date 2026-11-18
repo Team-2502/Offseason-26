@@ -45,7 +45,7 @@ fun aimCommand() : Command {
 }
 
 fun setFlywheelSpeedCommand() : Command {
-    val shooterSubsystem = RobotContainer.INSTANCE.ShooterSubsystem
+    val shooterSubsystem = RobotContainer.INSTANCE.shooterSubsystem
     val deltaXdistance = blueHubPose.x - robotPose.x
     val deltaYdistance = redHubPose.y - robotPose.y
     val deltaZdistance = abs(sqrt(deltaXdistance.pow(2) + deltaYdistance.pow(2))) //pythagorean theorm for the win

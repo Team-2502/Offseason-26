@@ -27,8 +27,6 @@ class Constants {
         const val INDEXER_FEED_DUTY_CYCLE_LEFT: Double = 1.0
         const val INDEXER_PASSIVE_DUTY_CYCLE_RIGHT: Double = 0.1
         const val INDEXER_PASSIVE_DUTY_CYCLE_LEFT: Double = 0.1
-        const val MIN_VELOCITY: Double = 40.0
-        const val MAX_VELOCITY: Double = 320.0
 
     }
 
