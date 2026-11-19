@@ -16,45 +16,32 @@ object RobotCAN {
         MotorConfig(PIDConfig(kP = 40.0), true, NeutralModeValue.Coast)
 
     val INTAKE_RIGHT = CANConfig(
-        1,
+        9,
         "Intake Right",
         RobotCANBus.RIO,
         MotorConfig(PIDConfig(kP = 0.1), ccwp = false, neutralMode = NeutralModeValue.Coast),
         )
 
     val INTAKE_LEFT = CANConfig(
-        2,
+        10,
         "Intake Left",
         RobotCANBus.RIO,
         MotorConfig(PIDConfig(kP = 0.1), ccwp = false, neutralMode = NeutralModeValue.Coast),
     )
 
     val INDEXER_RIGHT = CANConfig(
-        3,
+        11,
         "Indexer Right",
         RobotCANBus.RIO,
         MotorConfig(PIDConfig(kP = 0.1), ccwp = false, neutralMode = NeutralModeValue.Brake),
     )
 
-    val INDEXER_LEFT = CANConfig(
-        4,
-        "Indexer Left",
-        RobotCANBus.RIO,
-        MotorConfig(PIDConfig(kP = 0.1), ccwp = false, neutralMode = NeutralModeValue.Brake),
-    )
-
     val SHOOTER_RIGHT = CANConfig(
-        5,
+        12,
         "Shooter Right",
         RobotCANBus.RIO,
         MotorConfig(PIDConfig(kP = 0.1), ccwp = false, neutralMode = NeutralModeValue.Brake),
     )
 
-    val SHOOTER_LEFT = CANConfig(
-        6,
-        "Shooter Left",
-        RobotCANBus.RIO,
-        MotorConfig(PIDConfig(kP = 0.1), ccwp = false, neutralMode = NeutralModeValue.Brake),
-    )
 
 }

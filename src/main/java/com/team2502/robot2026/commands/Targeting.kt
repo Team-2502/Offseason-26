@@ -26,12 +26,18 @@ fun aimCommand() : Command {
 
 
     val alliance = DriverStation.getAlliance()?: DriverStation.Alliance.Blue
+
     val target = if (alliance == DriverStation.Alliance.Blue)
-        {blueHubPose}
+        blueHubPose
     else redHubPose
 
 
-    val aimAngle = atan2(blueHubPose.y - robotPose.y, blueHubPose.x - robotPose.x)
+    val aimAngle = if (target == blueHubPose) {
+        atan2(blueHubPose.y - robotPose.y, blueHubPose.x - robotPose.x)
+    }
+    else{
+        atan2(redHubPose.y - robotPose.y, redHubPose.x - robotPose.x)
+    }
 
     val gain = controller.calculate(robotPose.rotation.radians, aimAngle)
 
@@ -53,5 +59,5 @@ fun setFlywheelSpeedCommand() : Command {
     val shooterNumber = 1 //made up, just a placeholder, tune later // y=mx+B
     var flywheelSpeed = shooterCoeffiecent * deltaZdistance + shooterNumber
 
-    return runOnce({shooterSubsystem.setDutyCycleShooter(flywheelSpeed, flywheelSpeed)}, shooterSubsystem)
+    return runOnce({shooterSubsystem.setDutyCycleShooter(flywheelSpeed)}, shooterSubsystem)
     }
