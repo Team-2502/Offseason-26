@@ -49,15 +49,15 @@ fun aimCommand() : Command {
     })
 
 }
-
-fun setFlywheelSpeedCommand() : Command {
-    val shooterSubsystem = RobotContainer.INSTANCE.shooterSubsystem
-    val deltaXdistance = blueHubPose.x - robotPose.x
-    val deltaYdistance = redHubPose.y - robotPose.y
-    val deltaZdistance = abs(sqrt(deltaXdistance.pow(2) + deltaYdistance.pow(2))) //pythagorean theorm for the win
-    val shooterCoeffiecent = 1 //made up, just a placeholder, tune later //y=Mx+b
-    val shooterNumber = 1 //made up, just a placeholder, tune later // y=mx+B
-    var flywheelSpeed = shooterCoeffiecent * deltaZdistance + shooterNumber
-
-    return runOnce({shooterSubsystem.setDutyCycleShooter(flywheelSpeed)}, shooterSubsystem)
-    }
+//
+//fun setFlywheelSpeedCommand() : Command {
+//    val shooterSubsystem = RobotContainer.INSTANCE.shooterSubsystem
+//    val deltaXdistance = blueHubPose.x - robotPose.x
+//    val deltaYdistance = redHubPose.y - robotPose.y
+//    val deltaZdistance = abs(sqrt(deltaXdistance.pow(2) + deltaYdistance.pow(2))) //pythagorean theorm for the win
+//    val shooterCoeffiecent = 1 //made up, just a placeholder, tune later //y=Mx+b
+//    val shooterNumber = 1 //made up, just a placeholder, tune later // y=mx+B
+//    var flywheelSpeed = shooterCoeffiecent * deltaZdistance + shooterNumber
+//
+//    return runOnce({shooterSubsystem.setDutyCycleShooter(flywheelSpeed)}, shooterSubsystem)
+//    }

@@ -3,6 +3,8 @@
 // the WPILib BSD license file in the root directory of this project.
 package com.team2502.robot2026
 
+import com.ctre.phoenix6.configs.TalonFXConfiguration
+import com.ctre.phoenix6.signals.FeedbackSensorSourceValue
 import com.ctre.phoenix6.swerve.SwerveModule
 import com.ctre.phoenix6.swerve.SwerveRequest
 import com.team2502.lib.TMJoystick
@@ -10,7 +12,6 @@ import com.team2502.robot2026.Constants.OI
 import com.team2502.robot2026.commands.aimCommand
 import com.team2502.robot2026.commands.runIntakeCommand
 import com.team2502.robot2026.commands.runOuttakeCommand
-import com.team2502.robot2026.commands.setFlywheelSpeedCommand
 import com.team2502.robot2026.commands.ShootCommand
 import com.team2502.robot2026.subsystems.Drive.CommandSwerveDrivetrain
 import com.team2502.robot2026.subsystems.VisionSubsystem
@@ -45,6 +46,20 @@ class RobotContainer {
     // separate from init b/c init needs to execute first
     fun initialize() {
         configureBindings()
+
+        for (i in 0 until 4) {
+            val steerMotor = drivetrainSubsystem.getModule(i).steerMotor
+            val config = TalonFXConfiguration()
+            steerMotor.configurator.refresh(config)
+
+            config.Feedback.apply {
+                FeedbackSensorSource = FeedbackSensorSourceValue.RotorSensor
+                SensorToMechanismRatio = TunerConstants.kSteerGearRatio
+            }
+
+            steerMotor.configurator.apply(config)
+            steerMotor.setPosition(0.0)
+        }
     }
 
     fun configureBindings() {
@@ -70,19 +85,10 @@ class RobotContainer {
         operator.leftThumbButton().whileTrue(runIntakeCommand())
         operator.middleThumbButton().whileTrue(runOuttakeCommand())
         operator.rightThumbButton().whileTrue(aimCommand()) //wanna change this so trigger aims, waits 0.5 seconds(for flywheels to adjust speed, then starts shooting
+        operator.trigger().whileTrue(ShootCommand(0.1))
     }
 
     fun update() {
-
-        if (operator.frontTrigger().equals(true)){
-            shooterSubsystem.isShooting = true
-        }
-        else{
-            shooterSubsystem.isShooting = false
-        }
-
-        setFlywheelSpeedCommand()
-        ShootCommand()
     }
 
     // global subsystem access via companion object

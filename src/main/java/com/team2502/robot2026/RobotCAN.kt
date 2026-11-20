@@ -19,7 +19,7 @@ object RobotCAN {
         9,
         "Intake Right",
         RobotCANBus.RIO,
-        MotorConfig(PIDConfig(kP = 0.1), ccwp = false, neutralMode = NeutralModeValue.Coast),
+        MotorConfig(PIDConfig(kP = 0.1), ccwp = true, neutralMode = NeutralModeValue.Coast),
         )
 
     val INTAKE_LEFT = CANConfig(

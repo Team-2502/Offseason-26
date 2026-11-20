@@ -42,6 +42,11 @@ class ShooterSubsystem : SubsystemBase() {
 
     fun stop(){
         indexerRightMotor.stopMotor()
+        shooterRightMotor.stopMotor()
     }
 
+    fun set(shooter: Double, handoff: Double) {
+        setDutyCycleFeed(handoff)
+        setDutyCycleShooter(shooter)
+    }
 }
